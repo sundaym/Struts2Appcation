@@ -6,6 +6,9 @@
 <struts>
     <!--constant元素,配置常量可以改变struts2框架的一些行为，name表示常量名称，value表示常量值-->
     <constant name="struts.i18n.encoding" value="UTF-8"/> <!--解决中文乱码-->
+    <!--启用动态方法调用-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+
     <!--
         package标签：该标签配置控制器的包结构，package标签可以有多个
         name属性：自定义，必须唯一，与编码没有任何关系，主要用于区分package
@@ -29,5 +32,13 @@
             <result name="success">/success.jsp</result>
         </action>
     </package>
+    <package name="user" namespace="/" extends="default">
+        <!--添加白名单-->
+        <global-allowed-methods>regex:.*</global-allowed-methods>
 
+        <action name="user" class="com.app.web.UserAction">
+            <!--动态方法调用 /actionName!methodName.action-->
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
 </struts>
