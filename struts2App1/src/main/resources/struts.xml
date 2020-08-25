@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <!--constant元素,配置常量可以改变struts2框架的一些行为，name表示常量名称，value表示常量值-->
+    <constant name="struts.i18n.encoding" value="UTF-8"/> <!--解决中文乱码-->
+    <!--
+        package标签：该标签配置控制器的包结构，package标签可以有多个
+        name属性：自定义，必须唯一，与编码没有任何关系，主要用于区分package
+        extends属性：继承某个package，其中struts-default是struts2框架的核心
+        extends属性：用于继承struts的配置，可以继承struts-default,json-default,还可用于继承自定义的package
+        namespace属性：命名空间，默认为"/"(根目录),相当于1级目录
+    -->
+    <package name="default" extends="struts-default" namespace="/">
+        <!--
+            action标签用于配置访问路径
+            name属性：填写请求访问路径，必填且唯一
+            class属性：填写控制器Action的地址，省略则访问ActionSupport类执行execute方法
+            method属性：用于指定要执行的方法
+        -->
+        <action name="hello" class="com.app.web.HelloAction" method="helloWorld">
+            <!--
+                result标签：配置返回的资源地址（可以返回页面，也可以去到另一个控制器
+                name属性：配置返回的结果字符串，默认为"success"，可以省略
+                type属性： 指定返回的方式，默认是"dispatcher"(转发)，转发是"redirect"
+            -->
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
+
+</struts>
